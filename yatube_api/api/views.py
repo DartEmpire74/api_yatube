@@ -31,6 +31,5 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         post_id = self.kwargs.get('post_id')
-        if post_id:
-            return Comment.objects.filter(post_id=post_id)
-        return Comment.objects.all()
+        post = get_object_or_404(Post, id=post_id)
+        return Comment.objects.filter(post_id=post_id)
